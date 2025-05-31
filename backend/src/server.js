@@ -1,20 +1,34 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongoose = require("mongoose")
+
+const authRouter = require("./routes/auth")
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 
+// db connection
+mongoose.connect(process.env.MONGO_URI, {})
+.then(connection => {
+  console.log("mongo db connection established")
+})
+.catch(error => {
+  console.log("mongo db connection error : ", error)
+})
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Routes
-app.get('/api/greeting', (req, res) => {
+app.get('/greeting', (req, res) => {
   res.json({ message: 'Welcome to MediLink API!' });
 });
+
+app.use("/v1/auth", authRouter)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
