@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/user")
 const OtpModel = require("../models/emailOtpVerification")
 const { verifyAccessToken } = require("../middlewares/authentication")
+const { sendMail } = require("../helper")
+
 
 Router.post("/signup", (req, res) => {
     const newUser = req.body
@@ -105,17 +107,23 @@ Router.get("/email-verify/request", verifyAccessToken, (req, res) => {
             throw "email already verified"
         }
 
-        const dummyOtp = "990088"
+        const newOtp = Math.ceil(Math.random() * 1000000)
 
-        return OtpModel.findOneAndUpdate({ email: req.userEmail }, { otp: dummyOtp }, { new: true })
+        return OtpModel.findOneAndUpdate({ email: req.userEmail }, { otp: newOtp }, { new: true })
     })
     .then(otpDoc => {
+
+        return sendMail(
+            req.userEmail, 
+            "MediLink: OTP for email verification",
+            "Your OTP is " + otpDoc.otp
+        )
+    })
+    .then(() => {
         return res.status(200).json({
             message: "verification request sent successful",
             error: null,
-            data: {
-                otp: otpDoc.otp
-            }
+            data: null
          })
     })
     .catch(error => {
