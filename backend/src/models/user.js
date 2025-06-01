@@ -17,7 +17,7 @@ const profileSchema = new mongoose.Schema({
     address: {
         type: String
     }
-})
+}, {_id: false})
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -71,6 +71,12 @@ userSchema.post("save", function() {
         email: this.email,
         otp: null
     })
+})
+
+userSchema.post("findOneAndDelete", function() {
+    // TODO: revisit the logic here
+    console.log("HERE : ", this)
+    return OtpModel.deleteOne({ email: this.email })
 })
 
 module.exports = mongoose.model("User", userSchema)
