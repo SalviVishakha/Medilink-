@@ -28,6 +28,29 @@ function sendMail(recieverEmailId, subject, body) {
       })
 }
 
+function getEpochMilliSeconds(dateTimeString) {
+  let milliseconds = Date.parse(dateTimeString)
+
+  if(milliseconds == NaN) {
+    throw "invalid date time format"
+  }
+
+  return milliseconds
+}
+
+function checkIsDateTimeFuture(milliseconds) {
+  let currentMilliSeconds = Date.now()
+
+  if(milliseconds <= currentMilliSeconds) {
+    throw "date time cannot be of past"
+  }
+
+  return milliseconds
+}
+
+
 module.exports = {
-    sendMail
+    sendMail,
+    getEpochMilliSeconds,
+    checkIsDateTimeFuture
 }

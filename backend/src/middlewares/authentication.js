@@ -20,6 +20,38 @@ function verifyAccessToken(req, res, next) {
     next()
 }
 
+function checkIsPatient(req, res, next) {
+    try {
+        if(req.userRole != "patient") {
+            throw "only patient can create appointment"
+        }
+    } catch (error) {
+        return res.status(422).json({
+            message: "unauthorized access",
+            error: error,
+            data: null
+         })
+    }
+   next()
+}
+
+function checkIsDoctor(req, res, next) {
+    try {
+        if(req.userRole != "doctor") {
+            throw "only doctor can update appointment"
+        }
+    } catch (error) {
+        return res.status(422).json({
+            message: "unauthorized access",
+            error: error,
+            data: null
+         })
+    }
+   next()
+}
+
 module.exports = {
-    verifyAccessToken
+    verifyAccessToken,
+    checkIsPatient,
+    checkIsDoctor
 }

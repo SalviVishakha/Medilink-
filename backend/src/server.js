@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 
 const authRouter = require("./routes/auth")
 const userRouter = require("./routes/user")
+const appointmentRouter = require("./routes/appointment")
 
 // Load environment variables
 dotenv.config();
@@ -31,6 +32,7 @@ app.get('/greeting', (req, res) => {
 
 app.use("/v1/auth", authRouter)
 app.use("/v1/user", userRouter)
+app.use("/v1/appointments", appointmentRouter)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
