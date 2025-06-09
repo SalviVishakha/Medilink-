@@ -21,6 +21,7 @@ Router.post("/signup", (req, res) => {
          })
     })
     .catch(error => {
+        console.error("Signup Error:", error); 
         return res.status(422).json({
             message: "signup failed",
             error: error,
