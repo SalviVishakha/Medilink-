@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import EmailVerification from './components/EmailVerification';
 import DoctorDashboard from './pages/DoctorDashboard';
-import BookAppointment from './pages/BookAppointment';
+import BookAppointment from './pages/BookAppointment'; // <- Add this import
 
 function App() {
-  const isAuthenticated = !!localStorage.getItem('token');
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('accessToken'));
+
+  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsAuthenticated(!!localStorage.getItem('accessToken'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <Router>
@@ -17,16 +27,18 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<EmailVerification />} />
-        <Route path="/book-appointment" element={<BookAppointment />} />
-        <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-
+        <Route
+          path="/book-appointment"
+          element={isAuthenticated ? <BookAppointment /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/doctor-dashboard"
+          element={isAuthenticated ? <DoctorDashboard /> : <Navigate to="/login" replace />}
+        />
         <Route
           path="/dashboard"
-          element={
-            isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />
-          }
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />}
         />
-        {/* Optional: fallback for unknown routes */}
         <Route path="*" element={<div className="text-center p-6">404 - Page Not Found</div>} />
       </Routes>
     </Router>

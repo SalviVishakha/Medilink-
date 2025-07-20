@@ -23,10 +23,11 @@ const Login = () => {
       const res = await axios.post("http://localhost:5000/v1/auth/login", credentials);
       console.log("Login response:", res.data);
     
-
+       const { accessToken, name, email, role } = res.data.data;
 
       // Store token and user details
-      localStorage.setItem("token", res.data.data.accessToken);
+      localStorage.setItem("accessToken", res.data.data.accessToken);
+       localStorage.setItem("userName", name);
       localStorage.setItem("userEmail", res.data.data.email);
       localStorage.setItem("userRole", res.data.data.role);
 

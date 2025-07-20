@@ -1,57 +1,64 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
+// Middleware to verify access token
 function verifyAccessToken(req, res, next) {
     try {
-        if(req.headers.authorization == null) {
-            throw "invalid access"
-        }
-        const verifiedData = jwt.verify(req.headers.authorization, process.env.SECRET)
-        console.log("verify : ", verifiedData)
+        const authHeader = req.headers.authorization;
 
-        req.userEmail = verifiedData.email 
-        req.userRole = verifiedData.role
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(403).json({
+                message: "Authentication failed",
+                error: "Invalid or missing access token",
+                data: null
+            });
+        }
+
+        const token = authHeader.split(" ")[1]; // Extract token after "Bearer"
+        const verifiedData = jwt.verify(token, process.env.SECRET);
+
+        console.log("verifyAccessToken:", verifiedData);
+
+        req.userEmail = verifiedData.email;
+        req.userRole = verifiedData.role;
+
+        next();
     } catch (error) {
         return res.status(403).json({
-            message: "authentication failed",
-            error: "invalid access",
+            message: "Authentication failed",
+            error: error.message || "Invalid token",
             data: null
-         })
+        });
     }
-    next()
 }
 
+// Middleware to check if user is a patient
 function checkIsPatient(req, res, next) {
-    try {
-        if(req.userRole != "patient") {
-            throw "only patient can create appointment"
-        }
-    } catch (error) {
-        return res.status(422).json({
-            message: "unauthorized access",
-            error: error,
+    if (req.userRole !== "patient") {
+        return res.status(403).json({
+            message: "Unauthorized access",
+            error: "Only patients can access this resource",
             data: null
-         })
+        });
     }
-   next()
+
+    next();
 }
 
+// Middleware to check if user is a doctor
 function checkIsDoctor(req, res, next) {
-    try {
-        if(req.userRole != "doctor") {
-            throw "only doctor can update appointment"
-        }
-    } catch (error) {
-        return res.status(422).json({
-            message: "unauthorized access",
-            error: error,
+    if (req.userRole !== "doctor") {
+        return res.status(403).json({
+            message: "Unauthorized access",
+            error: "Only doctors can access this resource",
             data: null
-         })
+        });
     }
-   next()
+
+    next();
 }
 
 module.exports = {
     verifyAccessToken,
     checkIsPatient,
     checkIsDoctor
-}
+};

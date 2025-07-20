@@ -1,135 +1,129 @@
-const Router = require("express").Router();
-const { verifyAccessToken, checkIsPatient } = require("../middlewares/authentication");
-const User = require("../models/user");
-const lodash = require("lodash");
+const Router = require("express").Router()
+const { verifyAccessToken, checkIsPatient } = require("../middlewares/authentication")
+const User = require("../models/user")
+const lodash = require("lodash")
 
 // GET /user
-Router.get("/", verifyAccessToken, async (req, res) => {
-    try {
-        const doc = await User.findOne({ email: req.userEmail, role: req.userRole });
-        if (!doc) {
-            return res.status(404).json({
-                message: "User not found",
-                error: "Not found",
-                data: null
-            });
-        }
-
-        const userObj = doc.toObject();
-        delete userObj.password;
-
-        return res.status(200).json({
-            message: "User fetch successful",
-            error: null,
-            data: userObj
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({
-            message: "User fetch failed",
-            error: error.message,
-            data: null
-        });
-    }
-});
-
 // UPDATE /user
-Router.put("/", verifyAccessToken, async (req, res) => {
-    try {
-        if (lodash.isEmpty(req.body)) {
-            return res.status(400).json({
-                message: "Bad request",
-                error: "Send user information",
-                data: null
-            });
-        }
-
-        const userDoc = await User.findOneAndUpdate(
-            { email: req.userEmail, role: req.userRole },
-            { ...req.body },
-            { new: true }
-        );
-
-        if (!userDoc) {
-            return res.status(404).json({
-                message: "User not found",
-                error: "Not found",
-                data: null
-            });
-        }
-
-        const userObj = userDoc.toObject();
-        delete userObj.password;
-
-        return res.status(200).json({
-            message: "User update successful",
-            error: null,
-            data: userObj
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({
-            message: "User update failed",
-            error: error.message,
-            data: null
-        });
-    }
-});
-
 // DELETE /user
-Router.delete("/", verifyAccessToken, async (req, res) => {
-    try {
-        const userDoc = await User.findOneAndDelete({ email: req.userEmail, role: req.userRole });
-        
-        if (!userDoc) {
-            return res.status(404).json({
-                message: "User not found",
-                error: "Not found",
-                data: null
-            });
-        }
 
-        const userObj = userDoc.toObject();
-        delete userObj.password;
-
-        return res.status(200).json({
-            message: "User delete successful",
-            error: null,
-            data: userObj
-        });
-    } catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({
-            message: "User delete failed",
-            error: error.message,
-            data: null
-        });
-    }
-});
-
-// GET /user/doctors
-Router.get("/doctors", 
-    verifyAccessToken,
-    checkIsPatient,
-    async (req, res) => {
-        try {
-            const doctors = await User.find({ role: "doctor" })
-                .select("name email _id profile.specialization profile.address");
+Router.get("/", verifyAccessToken, (req, res) => {
+    return User.findOne({ email: req.userEmail, role: req.userRole })
+        .then(doc => {
+            delete doc._doc.password
 
             return res.status(200).json({
-                message: "Doctors fetch successful",
+                message: "user fetch successful",
                 error: null,
-                data: doctors
-            });
-        } catch (error) {
-            console.error("Error:", error);
-            return res.status(500).json({
-                message: "Doctors fetch failed",
-                error: error.message,
-                data: null
-            });
-        }
-    }
-);
+                data: {
+                    ...doc._doc,
+                }
+            })
+        })
+        .catch(error => {
+            console.log(" error: ", error)
 
-module.exports = Router;
+            return res.status(422).json({
+                message: "user fetch failed",
+                error: error,
+                data: null
+            })
+        })
+})
+
+Router.put("/", verifyAccessToken, (req, res) => {
+    return Promise.resolve()
+        .then(() => {
+            console.log("user body:", req.body)
+            if (lodash.isEmpty(req.body)) {
+                throw "send user information"
+            }
+
+            return User.findOneAndUpdate({ email: req.userEmail, role: req.userRole }, { ...req.body }, { new: true })
+        })
+        .then(userDoc => {
+            delete userDoc._doc.password
+
+            return res.status(200).json({
+                message: "user update successful",
+                error: null,
+                data: {
+                    ...userDoc._doc,
+                }
+            })
+        })
+        .catch(error => {
+            console.log(" error: ", error)
+
+            return res.status(422).json({
+                message: "user update failed",
+                error: error,
+                data: null
+            })
+        })
+})
+
+Router.delete("/", verifyAccessToken, (req, res) => {
+    return User.findOneAndDelete({ email: req.userEmail, role: req.userRole })
+        .then(userDoc => {
+            delete userDoc._doc.password
+
+            return res.status(200).json({
+                message: "user delete successful",
+                error: null,
+                data: {
+                    ...userDoc._doc,
+                }
+            })
+        })
+        .catch(error => {
+            console.log(" error: ", error)
+
+            return res.status(422).json({
+                message: "user delete failed",
+                error: error,
+                data: null
+            })
+        })
+})
+
+Router.get("/doctors",
+    verifyAccessToken,
+    checkIsPatient,
+    (req, res) => {
+
+
+        return User.find({ role: "doctor" })
+            .then(documents => {
+
+                return res.status(200).json({
+                    message: "user fetch successful",
+                    error: null,
+                    data: documents.map((doctor) => {
+                        let doctorInfo = {
+                            _id: doctor._id,
+                            name: doctor.name,
+                        }
+
+                        if (doctor.profile) {
+                            doctorInfo.specialization = doctor.profile.specialization
+                            doctorInfo.address = doctor.profile.address
+                        }
+
+                        return doctorInfo
+                    })
+                })
+            })
+            .catch(error => {
+                console.log(" error: ", error)
+
+                return res.status(422).json({
+                    message: "user fetch failed",
+                    error: error,
+                    data: null
+                })
+            })
+    })
+
+
+module.exports = Router

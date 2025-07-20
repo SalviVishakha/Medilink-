@@ -8,40 +8,44 @@ const lodash = require("lodash")
 const Router = require("express").Router()
 
 Router.post("/", 
-    verifyAccessToken,
-    checkIsPatient,
-    (req, res) => {
-    const newAppointment = req.body
-
+  verifyAccessToken,
+  checkIsPatient,
+  (req, res) => {
+    const newAppointment = {
+      ...req.body,
+      patientId: req.userId // Or whatever you store for patient user id in middleware
+    };
+ console.log("Creating appointment:", newAppointment);
     return Promise.resolve()
-    .then(() => {
-        if(!newAppointment.dateTime) {
-            throw "invalid date time"
+      .then(() => {
+        if (!newAppointment.dateTime) {
+          throw "invalid date time";
         }
-    })
-    .then(() => getEpochMilliSeconds(newAppointment.dateTime))
-    .then((milliseconds) => checkIsDateTimeFuture(milliseconds))
-    .then((milliseconds) => { 
-        newAppointment.dateTime = milliseconds
-        return  Appointment.create(newAppointment)
-    })
-    .then(doc => {
+      })
+      .then(() => getEpochMilliSeconds(newAppointment.dateTime))
+      .then((milliseconds) => checkIsDateTimeFuture(milliseconds))
+      .then((milliseconds) => {
+        newAppointment.dateTime = milliseconds;
+        return Appointment.create(newAppointment);
+      })
+      .then(doc => {
         return res.status(201).json({
-            message: "appointment create successful",
-            error: null,
-            data: { ...doc._doc }
-         })
-    })
-    .catch(error => {
-        console.log("===error : ", error)
+          message: "appointment create successful",
+          error: null,
+          data: { ...doc._doc }
+        });
+      })
+      .catch(error => {
+        console.log("===error : ", error);
         return res.status(422).json({
-            message: "appointment create failed",
-            error: error,
-            data: null
-         })
-    })
+          message: "appointment create failed",
+          error: error,
+          data: null
+        });
+      });
+  }
+);
 
-})
 
 Router.get("/:role", verifyAccessToken, (req, res) => {
     // input --> role --> patient / doctor
