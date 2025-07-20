@@ -5,7 +5,9 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import EmailVerification from './components/EmailVerification';
 import DoctorDashboard from './pages/DoctorDashboard';
-import BookAppointment from './pages/BookAppointment'; // <- Add this import
+import BookAppointment from './pages/BookAppointment'; 
+import Home from './components/Home';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('accessToken'));
@@ -26,10 +28,12 @@ function App() {
         <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/signup"} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+       
         <Route path="/verify-email" element={<EmailVerification />} />
         <Route
-          path="/book-appointment"
-          element={isAuthenticated ? <BookAppointment /> : <Navigate to="/login" replace />}
+          path="/home"
+          element={isAuthenticated ? <Home /> : <Navigate to="/home" replace />}
         />
         <Route
           path="/doctor-dashboard"

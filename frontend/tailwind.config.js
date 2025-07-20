@@ -1,7 +1,10 @@
+// tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        darkblue: '#1e3a8a', // or your preferred dark blue color
+      },
+    },
   },
-  plugins: [],
 }
