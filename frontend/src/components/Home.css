@@ -1,0 +1,130 @@
+/* General Layout */
+.home-container {
+  min-height: 100vh;
+  background-color: #dbeafe; /* Light blue background */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+ background-color: #dbeafe;
+  border-bottom: 1px solid #e5e7eb;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.logo {
+  color: #151B54; /* Dark Blue */
+  font-size: 1.875rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.nav-links li:hover {
+  color: #151B54;
+}
+
+/* Hero Section */
+.hero-section {
+  flex: 1;
+  margin-top: 5rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #bfdbfe; /* Slightly darker blue container */
+  border-radius: 1rem;
+  padding: 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+/* Hero Text */
+.hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .hero-text {
+    text-align: left;
+  }
+}
+
+.hero-text h1 {
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: #151B54; /* Dark blue */
+  margin-bottom: 1.5rem;
+}
+
+.subtext {
+  font-size: 1.1rem;
+  color: #1e3a8a;
+  margin-bottom: 2rem;
+}
+
+.subsubtext {
+  font-size: 1rem;
+  color: #1e40af;
+  margin-bottom: 2rem;
+}
+
+/* CTA Button */
+.cta-button {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #151B54;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  text-decoration: underline;
+}
+
+/* Hero Image */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 700px;
+  max-width: 510px;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+}
