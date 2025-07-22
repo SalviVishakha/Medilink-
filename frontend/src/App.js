@@ -8,11 +8,9 @@ import DoctorDashboard from './pages/DoctorDashboard';
 import BookAppointment from './pages/BookAppointment'; 
 import Home from './components/Home';
 
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('accessToken'));
 
-  
   useEffect(() => {
     const handleStorageChange = () => {
       setIsAuthenticated(!!localStorage.getItem('accessToken'));
@@ -25,16 +23,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/signup"} />} />
+        {/* ✅ This makes sure Home is the first page */}
+        <Route path="/" element={<Home />} />
+        
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-       
         <Route path="/verify-email" element={<EmailVerification />} />
-        <Route
-          path="/home"
-          element={isAuthenticated ? <Home /> : <Navigate to="/home" replace />}
-        />
+        
         <Route
           path="/doctor-dashboard"
           element={isAuthenticated ? <DoctorDashboard /> : <Navigate to="/login" replace />}
@@ -43,6 +38,10 @@ function App() {
           path="/dashboard"
           element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />}
         />
+        
+        {/* Optional: keep /home */}
+        <Route path="/home" element={<Home />} />
+
         <Route path="*" element={<div className="text-center p-6">404 - Page Not Found</div>} />
       </Routes>
     </Router>
