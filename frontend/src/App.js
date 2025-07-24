@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import EmailVerification from './components/EmailVerification';
 import DoctorDashboard from './pages/DoctorDashboard';
 import BookAppointment from './pages/BookAppointment'; 
-import Home from './components/Home';
+import Home from './pages/Home';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('accessToken'));

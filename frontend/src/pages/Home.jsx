@@ -1,7 +1,8 @@
-import React from 'react';
+// ...existing imports
+import Steps from '../components/Steps';
 import doctorImage from '../assets/doctor.jpg';
 import { useNavigate } from 'react-router-dom';
-import './Home.css'; // Import external CSS
+import './Home.css'; 
 
 const Home = () => {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ const Home = () => {
       {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
-          {/* Text Content */}
           <div className="hero-text">
             <h1>Your Health, Our Priority</h1>
             <p className="subtext">
@@ -35,13 +35,15 @@ const Home = () => {
               Book Appointment →
             </button>
           </div>
-
-          {/* Image Content */}
+          {/* Image */}
           <div className="hero-image">
             <img src={doctorImage} alt="Doctors" />
           </div>
         </div>
       </div>
+
+      {/* ✅ Steps section comes below the hero section */}
+      <Steps />
     </div>
   );
 };
