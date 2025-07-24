@@ -19,7 +19,7 @@
   padding: 1rem 1.5rem;
  /* background-color: #dbeafe; */
   /* border-bottom: 1px solid #e5e7eb; */
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 100%;
@@ -133,3 +133,4 @@
   border-radius: 1rem;
   object-fit: cover;
 }
+
