@@ -1,10 +1,15 @@
 /* General Layout */
 .home-container {
   min-height: 100vh;
-  background-color: #dbeafe; /* Light blue background */
+  background-image: url('../assets/bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  image-rendering: auto;
   display: flex;
   flex-direction: column;
 }
+
 
 /* Navbar Styles */
 .navbar {
@@ -12,8 +17,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
- background-color: #dbeafe;
-  border-bottom: 1px solid #e5e7eb;
+ /* background-color: #dbeafe; */
+  /* border-bottom: 1px solid #e5e7eb; */
   position: fixed;
   top: 0;
   left: 0;
@@ -30,9 +35,9 @@
 .nav-links {
   display: flex;
   gap: 2rem;
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: #374151;
+  font-size: 1.32rem;
+  font-weight: bold;
+  color: #151B54;
   cursor: pointer;
 }
 
@@ -53,7 +58,7 @@
 .hero-content {
   display: flex;
   flex-direction: column;
-  background-color: #bfdbfe; /* Slightly darker blue container */
+  background-color: #f4f4f8; 
   border-radius: 1rem;
   padding: 4rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);

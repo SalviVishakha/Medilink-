@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import signupBg from '../assets/login.jpeg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,8 +41,20 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto mt-10 p-6 rounded-xl bg-gray-100 shadow-md">
-      <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">MediLink</h1>
+    <div
+  className="w-full max-w-md mx-auto mt-10 p-6 rounded-xl shadow-md"
+  style={{
+    backgroundImage: `url(${signupBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
+
+      <h1 className="text-center text-3xl font-bold mb-6" style={{ color: '#151B54' }}>
+  MediLink
+</h1>
+
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -71,12 +84,14 @@ const Login = () => {
           <option value="patient">Patient</option>
           <option value="doctor">Doctor</option>
         </select>
-        <button
-          type="submit"
-          className="w-full py-2 bg-blue-800 text-white rounded-md text-lg font-medium hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
+     <button
+  type="submit"
+  className="w-full py-2 rounded-md text-lg font-medium hover:opacity-90 transition text-white"
+  style={{ backgroundColor: '#151B54' }}
+>
+  Login
+</button>
+
       </form>
 
       <p className="mt-4 text-center text-sm">
@@ -88,5 +103,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;

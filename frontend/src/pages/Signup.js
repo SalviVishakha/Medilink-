@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import signupBg from '../assets/login.jpeg'; // adjust path as needed
+
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -44,9 +46,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto mt-10 p-6 rounded-xl bg-gray-100 shadow-md">
-      <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">MediLink</h1>
-      <h2 className="text-center text-2xl font-semibold text-blue-800 mb-1">Create your account</h2>
+   <div
+  className="w-full max-w-md mx-auto mt-10 p-6 rounded-xl shadow-md"
+  style={{
+    backgroundImage: `url(${signupBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
+
+      <h1 className="text-center text-3xl font-bold mb-6" style={{ color: '#151B54' }}>MediLink</h1>
+      <h2 className="text-center text-2xl font-semibold  mb-1" style={{ color: '#151B54' }} >Create your account</h2>
       <p className="text-center text-sm mb-4">
         Already have an account?{" "}
         <span
@@ -105,7 +116,7 @@ const Signup = () => {
         </select>
         <button
           type="submit"
-          className="w-full py-2 bg-blue-800 text-white rounded-md text-lg font-medium hover:bg-blue-700 transition-colors"
+          className="w-full py-2 text-white rounded-md text-lg font-medium hover:bg-blue-700 transition-colors"   style={{ backgroundColor: '#151B54' }}
         >
           Sign up
         </button>
