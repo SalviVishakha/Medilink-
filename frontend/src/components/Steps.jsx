@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaUserPlus, FaUserMd, FaCalendarCheck } from 'react-icons/fa';
+import '../pages/Home.css';
+  // make sure this path is correct
 
 const Steps = () => {
   const steps = [
@@ -21,23 +23,24 @@ const Steps = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
-  <h2 className="text-4xl font-bold text-center text-[#151B54] mb-14">How It Works</h2>
-  
-  <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
-    {steps.map((step, index) => (
-      <div
-        key={index}
-        className="bg-gray-100 p-8 rounded-2xl shadow-lg text-center transition transform hover:scale-105"
-      >
-        <div className="text-5xl text-blue-700 mb-4">{step.icon}</div>
-        <h3 className="text-2xl font-semibold mb-3">{step.title}</h3>
-        <p className="text-gray-600 text-lg">{step.description}</p>
+    <section className="steps-section">
+      <h2 className="text-4xl font-bold text-center text-[#151B54] mb-10">How It Works</h2>
+      
+      <div className="steps-container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              className="bg-gray-100 p-6 rounded-lg shadow-md text-center transition hover:shadow-lg"
+            >
+              {step.icon}
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-600">{step.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</section>
-
+    </section>
   );
 };
 

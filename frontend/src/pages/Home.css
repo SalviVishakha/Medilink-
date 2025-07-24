@@ -134,3 +134,16 @@
   object-fit: cover;
 }
 
+.steps-section {
+  background-color: #d1ebfa; /* Light background color */
+  padding: 4rem 1rem;
+}
+
+.steps-container {
+  background-color: rgb(255, 255, 255); /* Container background */
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
