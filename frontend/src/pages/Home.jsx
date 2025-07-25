@@ -1,5 +1,6 @@
 // ...existing imports
 import Steps from '../components/Steps';
+import Services from '../components/Services';
 import doctorImage from '../assets/doctor.jpg';
 import { useNavigate } from 'react-router-dom';
 import './Home.css'; 
@@ -44,6 +45,7 @@ const Home = () => {
 
       {/* ✅ Steps section comes below the hero section */}
       <Steps />
+      <Services />
     </div>
   );
 };

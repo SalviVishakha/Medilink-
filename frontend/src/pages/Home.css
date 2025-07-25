@@ -135,15 +135,26 @@
 }
 
 .steps-section {
-  background-color: #d1ebfa; /* Light background color */
+  background-color: #ffffff; /* Light background color */
   padding: 4rem 1rem;
 }
 
 .steps-container {
-  background-color: rgb(255, 255, 255); /* Container background */
+  background-color: rgb(220, 234, 250); /* Container background */
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 3rem 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
+  min-height: 200px;
   margin: 0 auto;
 }
+
+.services-section {
+  background-image: url('../assets/bg2.jpeg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: lighten;
+
+}
+
