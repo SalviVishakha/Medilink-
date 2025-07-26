@@ -149,12 +149,21 @@
   margin: 0 auto;
 }
 
-.services-section {
-  background-image: url('../assets/bg2.jpeg'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-blend-mode: lighten;
-
+/* Home.css */
+.service-icon {
+  color: #151B54;
+  font-size: 2rem; /* equivalent to Tailwind's text-4xl */
 }
 
+.service-name {
+  color: #151B54;
+  font-weight: 600;
+  font-size: 1.25rem; /* equivalent to text-xl */
+}
+
+.services-section h2{
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: #151B54; /* Dark blue */
+
+}
