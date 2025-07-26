@@ -226,23 +226,27 @@
   background: linear-gradient(to right, #020311, #020725);
   color: white;
   padding: 3rem 1rem 2rem;
-  border-top: 4px solid #bc8f83;
+  border-top: 4px solid ;
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .footer-grid {
-  display: grid;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .footer-title {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #e1bfb0;
+  /* color: #e1bfb0; */
 }
 
 .footer-subtitle {
