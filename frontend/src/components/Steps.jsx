@@ -24,8 +24,9 @@ const Steps = () => {
 
   return (
     <section className="steps-section">
-      <h2 className="text-4xl font-bold text-center text-[#151B54] mb-10">How It Works</h2>
-      
+      <div className="steps-text">
+      <h2 className="text-4xl font-bold text-center  mb-10">How It Works</h2>
+      </div>
       <div className="steps-container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {steps.map((step, index) => (

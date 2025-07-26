@@ -149,6 +149,12 @@
   margin: 0 auto;
 }
 
+.steps-text h2{
+   color: #151B54;
+    font-size: 2.75rem;
+  font-weight: bold;
+}
+
 /* Home.css */
 .services-section {
   /* background-image: url('../assets/bg3.jpeg'); */
