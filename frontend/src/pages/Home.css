@@ -2,8 +2,8 @@
 .home-container {
   min-height: 100vh;
   background-image: url('../assets/bg.jpg');
-  background-size: cover;
-  background-position: center center;
+   background-size: contain;   
+  /* background-position: center center; */
   background-repeat: no-repeat;
   image-rendering: auto;
   display: flex;
@@ -150,20 +150,171 @@
 }
 
 /* Home.css */
-.service-icon {
+.services-section {
+  /* background-image: url('../assets/bg3.jpeg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4rem 1rem;
   color: #151B54;
-  font-size: 2rem; /* equivalent to Tailwind's text-4xl */
+}
+
+.services-heading {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.services-heading h2 {
+  font-size: 2.75rem;
+  font-weight: bold;
+  color: #151B54;
+}
+
+.services-subheading {
+  color: #5d2421;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.services-desc {
+  color: #4b5563;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: #151B54;
+  margin-bottom: 0.75rem;
 }
 
 .service-name {
-  color: #151B54;
   font-weight: 600;
-  font-size: 1.25rem; /* equivalent to text-xl */
+  font-size: 1.25rem;
 }
 
-.services-section h2{
-  font-size: 2.75rem;
-  font-weight: bold;
-  color: #151B54; /* Dark blue */
+.service-text {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
 
+/* Footer Styles */
+.footer-section {
+  background: linear-gradient(to right, #151B54, #1e2761);
+  color: white;
+  padding: 3rem 1rem 2rem;
+  border-top: 4px solid #bc8f83;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #e1bfb0;
+}
+
+.footer-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #bc8f83;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #bc8f83;
+}
+
+.footer-contact p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-contact p svg {
+  color: #bc8f83;
+  font-size: 1.1rem;
+}
+
+.footer-social a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #151B54;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  background-color: #bc8f83;
+  color: white;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: #bbb;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
 }

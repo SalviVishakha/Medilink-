@@ -1,5 +1,5 @@
 import React from 'react';
-import '../pages/Home.css'; 
+import '../pages/Home.css';
 import {
   FaXRay,
   FaMicroscope,
@@ -9,6 +9,9 @@ import {
   FaNotesMedical,
   FaUserNurse,
   FaSyringe,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin
 } from 'react-icons/fa';
 
 const services = [
@@ -56,28 +59,66 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="services-section relative py-16 px-4 bg-cover bg-center bg-no-repeat">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-5xl font-bold text-[#151B54] mb-2">Our Services</h2>
-        <p className="text-lg text-[#5d2421] font-medium mb-2">Quality care with advanced facilities</p>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          At MediLink, we provide a wide range of services to ensure your complete health and wellness.
-        </p>
-      </div>
+    <>
+      {/* Services Section */}
+      <section className="services-section">
+        <div className="services-heading">
+          <h2>Our Services</h2>
+          <p className="services-subheading">Quality care with advanced facilities</p>
+          <p className="services-desc">
+            At MediLink, we provide a wide range of services to ensure your complete health and wellness.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition"
-          >
-            {service.icon}
-            <h3 className="mt-4 service-name">{service.name}</h3>
-            <p className="mt-2 text-gray-600 text-sm">{service.description}</p>
+        <div className="services-grid">
+          {services.map((service, index) => (
+            <div key={index} className="service-card">
+              {service.icon}
+              <h3 className="service-name">{service.name}</h3>
+              <p className="service-text">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="footer-section">
+        <div className="footer-grid">
+          <div>
+            <h3 className="footer-title">MediLink</h3>
+            <p className="footer-text">
+              Committed to providing top-notch healthcare services with compassion and care.
+            </p>
           </div>
-        ))}
-      </div>
-    </section>
+          <div>
+            <h4 className="footer-subtitle">Quick Links</h4>
+            <ul className="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="footer-subtitle">Contact Us</h4>
+            <p>📍 123 MediLink Street, Health City</p>
+            <p>📞 +91 9876543210</p>
+            <p>✉️ contact@medilink.com</p>
+          </div>
+          <div>
+            <h4 className="footer-subtitle">Follow Us</h4>
+            <div className="footer-social">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer"><FaFacebook /></a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer"><FaInstagram /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaLinkedin /></a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          &copy; {new Date().getFullYear()} MediLink. All rights reserved.
+        </div>
+      </footer>
+    </>
   );
 };
 
