@@ -185,14 +185,14 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .service-card {
-  background-color: white;
+  background-color: rgb(186, 210, 236);
   padding: 1.5rem;
   border-radius: 1rem;
   text-align: center;
@@ -223,7 +223,7 @@
 
 /* Footer Styles */
 .footer-section {
-  background: linear-gradient(to right, #151B54, #1e2761);
+  background: linear-gradient(to right, #020311, #020725);
   color: white;
   padding: 3rem 1rem 2rem;
   border-top: 4px solid #bc8f83;
@@ -249,7 +249,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #bc8f83;
+  /* color: #bc8f83; */
 }
 
 .footer-text {
@@ -286,7 +286,7 @@
 }
 
 .footer-contact p svg {
-  color: #bc8f83;
+  /* color: #bc8f83; */
   font-size: 1.1rem;
 }
 
