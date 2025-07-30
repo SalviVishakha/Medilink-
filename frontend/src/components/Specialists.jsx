@@ -38,6 +38,18 @@ const doctors = [
     image: require('../assets/doctor6.jpg'),
     description: 'Experienced in diagnosing and managing common health conditions.',
   },
+//   {
+//     name: 'Dr. Sana Sheikh',
+//     specialization: 'Endocrinologist',
+//     image: require('../assets/doctor7.jpg'),
+//     description: 'Expert in hormone-related disorders like diabetes and thyroid problems.',
+//   },
+//   {
+//     name: 'Dr. Aditya Rao',
+//     specialization: 'ENT Specialist',
+//     image: require('../assets/doctor8.jpg'),
+//     description: 'Specialist in ear, nose, and throat disorders and surgeries.',
+//   },
 ];
 
 const Specialists = () => {
@@ -51,6 +63,7 @@ const Specialists = () => {
               <img src={doc.image} alt={doc.name} />
               <h3>{doc.name}</h3>
               <p>{doc.specialization}</p>
+              <p className="description">{doc.description}</p>
             </div>
           ))}
         </div>
