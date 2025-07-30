@@ -2,11 +2,15 @@
 import Steps from '../components/Steps';
 import Services from '../components/Services';
 import doctorImage from '../assets/doctor.jpg';
-import { useNavigate } from 'react-router-dom';
+import Login from '../pages/Login'; // import your Login component
+import Signup from '../pages/Signup'; // import your Signup component
 import './Home.css'; 
+import { useState } from 'react';
 
 const Home = () => {
-  const navigate = useNavigate();
+  const [authMode, setAuthMode] = useState(null); // 'login' | 'signup' | null
+
+  const closeModal = () => setAuthMode(null);
 
   return (
     <div className="home-container">
@@ -17,7 +21,7 @@ const Home = () => {
           <li>Home</li>
           <li>About</li>
           <li>Contact</li>
-          <li onClick={() => navigate('/login')}>Login</li>
+          <li onClick={() => setAuthMode('login')} style={{ cursor: 'pointer' }}>Login</li>
         </ul>
       </nav>
 
@@ -32,7 +36,7 @@ const Home = () => {
             <p className="subsubtext">
               Join thousands of satisfied patients improving their health with MediLink.
             </p>
-            <button onClick={() => navigate('/signup')} className="cta-button">
+            <button onClick={() => setAuthMode('signup')} className="cta-button">
               Book Appointment →
             </button>
           </div>
@@ -43,9 +47,20 @@ const Home = () => {
         </div>
       </div>
 
-      {/* ✅ Steps section comes below the hero section */}
+      {/* Steps and Services Sections */}
       <Steps />
       <Services />
+
+      {/* Login or Signup Modal */}
+      {authMode && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button onClick={closeModal} className="close-button">×</button>
+            {authMode === 'login' && <Login onSuccess={closeModal} />}
+            {authMode === 'signup' && <Signup onSuccess={closeModal} />}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
