@@ -1,5 +1,6 @@
 /* General Layout */
 .home-container {
+   background-color: #f5f5f5;
   min-height: 100vh;
   background-image: url('../assets/bg.jpg');
    background-size: contain;   
@@ -135,7 +136,7 @@
 }
 
 .steps-section {
-  background-color: #ffffff; /* Light background color */
+  background-color:  #f5f5f5;; /* Light background color */
   padding: 4rem 1rem;
 }
 

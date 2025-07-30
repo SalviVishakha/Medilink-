@@ -1,5 +1,6 @@
 // ...existing imports
 import Steps from '../components/Steps';
+import Specialists from '../components/Specialists';
 import Services from '../components/Services';
 import doctorImage from '../assets/doctor.jpg';
 import Login from '../pages/Login'; // import your Login component
@@ -49,7 +50,9 @@ const Home = () => {
 
       {/* Steps and Services Sections */}
       <Steps />
+       <Specialists />
       <Services />
+     
 
       {/* Login or Signup Modal */}
       {authMode && (
