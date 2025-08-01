@@ -10,27 +10,30 @@ import BookAppointment from './pages/BookAppointment';
 import Home from './pages/Home';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('accessToken'));
+ const [isAuthenticated, setIsAuthenticated] = useState(() => {
+  const token = localStorage.getItem('accessToken');
+  return token && token !== 'undefined';
+});
+
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(!!localStorage.getItem('accessToken'));
-    };
+  const handleStorageChange = () => {
+    const token = localStorage.getItem('accessToken');
+    setIsAuthenticated(token && token !== 'undefined');
+  };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+  window.addEventListener('storage', handleStorageChange);
+  return () => window.removeEventListener('storage', handleStorageChange);
+}, []);
 
   return (
     <Router>
       <Routes>
-        {/* ✅ This makes sure Home is the first page */}
         <Route path="/" element={<Home />} />
-        
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<EmailVerification />} />
-        
+
         <Route
           path="/doctor-dashboard"
           element={isAuthenticated ? <DoctorDashboard /> : <Navigate to="/login" replace />}
@@ -40,9 +43,13 @@ function App() {
           element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />}
         />
         
-        {/* Optional: keep /home */}
-        <Route path="/home" element={<Home />} />
+       
+        <Route
+          path="/book-appointment"
+          element={isAuthenticated ? <BookAppointment /> : <Navigate to="/login" replace />}
+        />
 
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<div className="text-center p-6">404 - Page Not Found</div>} />
       </Routes>
     </Router>

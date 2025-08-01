@@ -1,17 +1,30 @@
-// ...existing imports
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import Steps from '../components/Steps';
 import Specialists from '../components/Specialists';
 import Services from '../components/Services';
 import doctorImage from '../assets/doctor.jpg';
-import Login from '../pages/Login'; // import your Login component
-import Signup from '../pages/Signup'; // import your Signup component
-import './Home.css'; 
-import { useState } from 'react';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
+import './Home.css';
 
 const Home = () => {
-  const [authMode, setAuthMode] = useState(null); // 'login' | 'signup' | null
+  const [authMode, setAuthMode] = useState(null); 
+  const navigate = useNavigate(); 
 
   const closeModal = () => setAuthMode(null);
+
+ const handleBookAppointment = () => {
+  const token = localStorage.getItem('accessToken');
+  
+  // 🛠 Only navigate if token exists and is valid
+  if (token && token !== 'undefined' && token !== 'null' && token.trim() !== '') {
+    navigate('/book-appointment');
+  } else {
+    setAuthMode('login'); // Show login modal
+  }
+};
+
 
   return (
     <div className="home-container">
@@ -19,7 +32,7 @@ const Home = () => {
       <nav className="navbar">
         <div className="logo">MediLink</div>
         <ul className="nav-links">
-          <li>Book Appointment</li>
+          <li onClick={handleBookAppointment} style={{ cursor: 'pointer' }}>Book Appointment</li>
           <li>Home</li>
           <li>About</li>
           <li>Contact</li>
@@ -38,11 +51,10 @@ const Home = () => {
             <p className="subsubtext">
               Join thousands of satisfied patients improving their health with MediLink.
             </p>
-            <button onClick={() => setAuthMode('signup')} className="cta-button">
+            <button onClick={handleBookAppointment} className="cta-button">
               Book Appointment →
             </button>
           </div>
-          {/* Image */}
           <div className="hero-image">
             <img src={doctorImage} alt="Doctors" />
           </div>
@@ -51,9 +63,8 @@ const Home = () => {
 
       {/* Steps and Services Sections */}
       <Steps />
-       <Specialists />
+      <Specialists />
       <Services />
-     
 
       {/* Login or Signup Modal */}
       {authMode && (
