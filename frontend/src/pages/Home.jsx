@@ -19,6 +19,7 @@ const Home = () => {
       <nav className="navbar">
         <div className="logo">MediLink</div>
         <ul className="nav-links">
+          <li>Book Appointment</li>
           <li>Home</li>
           <li>About</li>
           <li>Contact</li>
